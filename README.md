@@ -30,7 +30,7 @@ In addition, both **test** and **production datasets** can be loaded, enabling c
 
 ##  Dashboard Insights
 
-### 🔹 Supply & Demand Metrics
+###  Supply & Demand Metrics
 ![Supply & Demand Dashboard](images/Dashboard1.png)
 
 * **Average Demand per Day**: **48.65**
@@ -41,7 +41,7 @@ In addition, both **test** and **production datasets** can be loaded, enabling c
 
 ---
 
-### 🔹 Financial Performance
+###  Financial Performance
 ![Financial Performance Dashboard](images/Dashboard2.png)
 
 * **Total Profit**: **301K**
