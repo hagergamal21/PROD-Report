@@ -63,7 +63,7 @@ use test_env;
 select * from [dbo].[Products];
 select * from [dbo].[Test Environment Inventory Dataset];
 ```
-
+ Purpose: Create a test database to experiment safely. Load the products and test inventory datasets to validate structure and sample contents.
 ### 2. **Joined Inventory with Product Metadata**
 
 ```
@@ -78,7 +78,8 @@ from [dbo].[Test Environment Inventory Dataset] as a
 left join [dbo].[Products] as b 
     on a.Product_ID = b.Product_ID;
 ```
-
+Purpose: Combine inventory records (availability, demand) with product details (name, price).
+A LEFT JOIN ensures all inventory data is retained, even if some products are missing in the metadata table.
 ### 3. **Created a Clean Table for Analysis**
 
 ```
@@ -95,7 +96,8 @@ select * into New_table from (
         on a.Product_ID = b.Product_ID
 ) x;
 ```
-
+Purpose: Save the joined data into a new clean table for faster queries and easier integration with Power BI.
+Acts as a staging table for analysis.
 ### 4. **Production Database Setup & Data Cleaning**
 
 ```
@@ -104,7 +106,7 @@ use PROD;
 
 select * from [dbo].[Prod Env Inventory Dataset];
 ```
-
+Purpose: Load the production dataset in its own environment for real-world analysis.
 * **Handled Null / Blank Dates**
 
 ```
@@ -112,7 +114,7 @@ select distinct Order_Date_DD_MM_YYYY
 from [dbo].[Prod Env Inventory Dataset]
 where Order_Date_DD_MM_YYYY is null or Order_Date_DD_MM_YYYY = '';
 ```
-
+Identifies records with blank or missing dates that could cause reporting issues.
 * **Corrected Product IDs**
 
 ```
@@ -122,7 +124,7 @@ set Product_ID = 7 where Product_ID = 21;
 update [dbo].[Prod Env Inventory Dataset]
 set Product_ID = 11 where Product_ID = 22;
 ```
-
+Fixes incorrect product mappings to align with the master Products table.
 ### 5. **Final Production Dataset**
 
 ```
@@ -139,7 +141,8 @@ select * into New_table from (
         on a.Product_ID = b.Product_ID
 ) x;
 ```
-
+Purpose: Build a final, cleaned dataset in production by merging inventory with product details.
+This table is the one consumed by Power BI dashboards.
 ---
 
 ##  Tools & Technologies
